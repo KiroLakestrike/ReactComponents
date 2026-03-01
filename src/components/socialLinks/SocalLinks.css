@@ -1,13 +1,8 @@
-
+/* All general classes */
 .socials-container{
     display: flex;
     gap: 20px;
-    width:100vw;
-    justify-content:center;
-    position:absolute;
-    bottom:20px;
 }
-
 .socials-container a {
     background-color:white;
     padding:1em;
@@ -22,11 +17,9 @@
     place-items:center;
     box-shadow:0 5px 10px rgba(0,0,0,0.05);
 }
-
 .socials-container a svg {
     height: 32px;
 }
-
 .socials-container a::before{
     content: attr(data-social);
     position: absolute;
@@ -35,22 +28,28 @@
     text-decoration:none;
     padding: 0.5em 1em;
     border-radius: 100px;
-    box-shadow:0 5px 10pc rgba(0,0,0,0.05);
+    box-shadow:0 5px 10px rgba(0,0,0,0.05);
     transform: translateY(-30px) rotate(25deg);
     opacity:0;
     transition:200ms cubic-bezier(.42,0,.44,1.69);
+    white-space: nowrap;
 }
-
 .socials-container a:hover{
-    background-color:var(--accent-color);
-    fill: white;
+    background-color:var(--accent-color);+
+fill: white;
 }
-
 .socials-container a:hover svg {
     fill:white;
 }
 
-.socials-container a::after{
+/* All Classes for bottom orientation */
+.socials-container.bottom {
+    width:100%;
+    justify-content: center;
+    position: absolute;
+    bottom: 20px;
+}
+.socials-container.bottom a::after{
     content: '';
     position: absolute;
     height:0;
@@ -62,13 +61,101 @@
     opacity:0;
     transition:200ms cubic-bezier(.42,0,.44,1.69);
 }
-
-.socials-container a:hover::before{
+.socials-container.bottom a:hover::before{
     transform: translateY(-65px) rotate(0);
     opacity:1;
 }
-
-.socials-container a:hover::after{
+.socials-container.bottom a:hover::after{
     transform:translateY(-45px)rotate(0);
     opacity:1;
+}
+
+/* All Classes for top orientation */
+.socials-container.top {
+    width: 100%;
+    justify-content: center;
+    position: absolute;
+    top: 20px;
+}
+.socials-container.top a::after{
+    content: '';
+    position: absolute;
+    height:0;
+    width:0;
+    border-left:8px solid transparent;
+    border-right:8px solid transparent;
+    border-bottom:10px solid var(--accent-color);
+    transform: translateY(0) rotate(25deg);
+    opacity:0;
+    transition:200ms cubic-bezier(.42,0,.44,1.69);
+}
+.socials-container.top a:hover::before{
+    transform: translateY(65px) rotate(0);
+    opacity:1;
+}
+.socials-container.top a:hover::after{
+    transform:translateY(45px)rotate(0);
+    opacity:1;
+}
+
+/* All Classes for left orientation */
+.socials-container.left {
+    flex-direction: column;
+    position: absolute;
+    left: 20px;
+    gap: 20px;
+}
+.socials-container.left a {
+    position: relative;
+    display: inline-block;
+}
+.socials-container.left a::before {
+    content: attr(data-social);
+    position: absolute;
+    top: 10px;
+    background-color:var(--accent-color);
+    color:white;
+    text-decoration:none;
+    padding: 0.5em 1em;
+    border-radius: 100px;
+    box-shadow:0 5px 10px rgba(0,0,0,0.05);
+    transform: translateX(0) rotate(0deg);
+    transform-origin: left center;
+}
+.socials-container.left a:hover::before {
+    opacity: 1;
+    transform: translateX(65px) rotate(0deg);
+}
+
+/* All Classes for right orientation */
+.socials-container.right {
+    flex-direction: column;
+    position: absolute;
+    right: 20px;
+    gap: 20px;
+}
+.socials-container.right a {
+    position: relative;
+    display: inline-block;
+}
+.socials-container.right a::before {
+    content: attr(data-social);
+    position: absolute;
+    top: 10px;
+    right: 0;                      /* ← Startet rechts am Link */
+    background-color: var(--accent-color);
+    color: white;
+    padding: 0.5em 1em;
+    border-radius: 100px;
+    box-shadow: 0 5px 10px rgba(0,0,0,0.05);
+    opacity: 0;
+    transform: translateX(100%) rotate(0deg);  /* ← Initial: rechts versteckt */
+    transform-origin: right center;            /* Rechte Kante als Anker */
+    transition: opacity 0.3s, transform 0.3s;
+    white-space: nowrap;
+    z-index: 1;
+}
+.socials-container.right a:hover::before {
+    opacity: 1;
+    transform: translateX(-82px) rotate(0deg);  /* Gleitet nach links */
 }

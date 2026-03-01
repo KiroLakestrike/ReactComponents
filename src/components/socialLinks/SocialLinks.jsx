@@ -25,7 +25,7 @@ export default function SocialLinks() {
   }, []);
   
   return (
-    <div className="socials-container">
+    <div className="socials-container bottom">
       {loading && <div>Loading…</div>}
       
       {socials.map((social) => (
