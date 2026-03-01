@@ -5,18 +5,24 @@ export default function SocialLinks() {
   const [socials, setSocials] = useState([])
   const [loading, setLoading] = useState(true)
   
+  
+  // SocialLinks fetches the socials.json file from wherever it is hosted.
   useEffect(() => {
-    fetch('/socials.json')
-      .then((response) => response.json())
+    fetch('http://127.0.0.1:8000/api/v1/socials/')
+      .then((response) => {
+        if (!response.ok) throw new Error(`HTTP ${response.status}`);
+        return response.json();
+      })
       .then((data) => {
-        setSocials(Array.isArray(data) ? data : (data.socials ?? []))
-        setLoading(false)
+        console.log(data);  // Debug: Was kommt an?
+        setSocials(Array.isArray(data.socials) ? data.socials : []);
+        setLoading(false);
       })
       .catch((error) => {
-        console.error('Error fetching socials:', error)
-        setLoading(false)
-      })
-  }, [])
+        console.error('Error:', error);
+        setLoading(false);
+      });
+  }, []);
   
   return (
     <div className="socials-container">
